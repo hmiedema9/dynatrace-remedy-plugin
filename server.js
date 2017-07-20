@@ -19,13 +19,13 @@ app.use((request, response, next) => {
 //   next()
 // })
 
-router.get('/', (request, response) => {  
+app.get('/', (request, response) => {  
   response.json({
     chance: request.chance
   })
 })
 
-router.post('/', function(req, res) { })
+app.post('/', function(req, res) { })
 
 app.listen(port, (err) => {  
   if (err) {
