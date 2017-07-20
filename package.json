@@ -1,0 +1,16 @@
+{
+  "name": "node-http-dynatrace",
+  "version": "1.0.0",
+  "description": "Node app used to accept POST data from Dynatrace webhook",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:hmiedema9/dynatrace-remedy-plugin.git"
+  },
+  "author": "Hayden Miedema <@hmiedema9>",
+  "license": "MIT",
+  "homepage": "https://github.com/hmiedema9/dynatrace-remedy-plugin",
+  "dependencies": {
+    "body-parser": "1.10.2",
+    "express": "4.11.1"
+  }
+}
