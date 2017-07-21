@@ -10,7 +10,6 @@ app.use(bodyParser.json({ type: 'application/json' }));
 
 app.use((request, response, next) => {  
   console.log(request.headers)
-  console.log("Test")
   next()
 })
 
@@ -27,11 +26,13 @@ app.get('/', (request, response) => {
 
 app.post('/', function(req, res) {
   var body = req.body;
-  var problem_id = body.msg.problem_id;
-  var slug = body.msg.slug;
-  var token = body.msg.unique_token;
+  var problem_state = body.State;
+  var problem_id = body.ProblemID;
+  var problem_title = body.ProblemTitle;
+  
 
-  console.log(trackingNumber, slug, token);
+  console.log("Data Below");
+  console.log("Problem ID:", problem_id, "\nProblem State:", problem_state, "\nProblem Title:", problem_title);
 
   res.json({
       message: 'received message'
