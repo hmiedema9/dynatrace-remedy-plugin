@@ -25,11 +25,22 @@ app.get('/', (request, response) => {
   })
 })
 
-app.post('/', function(req, res) { })
+app.post('/', function(req, res) {
+  var body = req.body;
+  var problem_id = body.msg.problem_id;
+  var slug = body.msg.slug;
+  var token = body.msg.unique_token;
+
+  console.log(trackingNumber, slug, token);
+
+  res.json({
+      message: 'received message'
+   });
+ })
 
 app.listen(port, (err) => {  
   if (err) {
-    return console.log('something bad happened', err)
+    return console.log('Something went wrong', err)
   }
 
   console.log(`server is listening on ${port}`)
