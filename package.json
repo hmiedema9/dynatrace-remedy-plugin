@@ -11,6 +11,7 @@
   "homepage": "https://github.com/hmiedema9/dynatrace-remedy-plugin",
   "dependencies": {
     "body-parser": "1.10.2",
-    "express": "4.11.1"
+    "express": "4.11.1",
+    "nodemailer": "^4.0.1"
   }
 }
