@@ -45,7 +45,7 @@ app.get('/', (request, response) => {
   })
 })
 
-app.post('/', function(req, res) {
+app.post('/dynatrace', function(req, res) {
   var body = req.body;
   var problem_state = body.State;
   var problem_id = body.ProblemID;
