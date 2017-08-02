@@ -35,10 +35,10 @@ app.use((request, response, next) => {
   next()
 })
 
-// app.use((request, response, next) => {  
-//   request.chance = Math.random()
-//   next()
-// })
+app.use((request, response, next) => {  
+  request.chance = Math.random()
+  next()
+})
 
 app.get('/', (request, response) => {  
   response.json({
@@ -46,17 +46,19 @@ app.get('/', (request, response) => {
   })
 })
 
+
 // define soap params
     var params = {
-		host   : 'www.sample.com',
-		path   : '/path/soap/',
-        wsdl   : '/path/wsdl/',
+		host   : 'http://izxuwa5.ivdc.kp.org:9080/',
+		path   : '/arsys/services/ARService',
+        wsdl   : '/arsys/services/ARService?wsdl',
 
 		// set soap headers (optional)
 		headers: [{
-            'name'     : 'item_name',
-            'value'    : 'item_value',
-            'namespace': 'item_namespace'
+            AuthenticationInfo : {
+                userName : 'WSKPORG',
+                password : 'eventexcavations8401'
+            }
         }]
     }
 
@@ -70,39 +72,51 @@ app.get('/', (request, response) => {
         /*
 		 * get all available functions
     	 */
-		soapClient.getAllFunctions()
-        	.then((functionArray) => { console.log(functionArray); })
-			.catch((err) => { throw new Error(err); });
+		// soapClient.getAllFunctions()
+        // 	.then((functionArray) => { console.log(functionArray); })
+		// 	.catch((err) => { throw new Error(err); });
 
 
 		/*
 		 * get the method params by given methodName
          */
-		soapClient.getMethodParamsByName('methodName')
-        	.then((methodParams) => {
-				console.log(methodParams.request);
-				console.log(methodParams.response);
-			})
-			.catch((err) => { throw new Error(err); });
+		// soapClient.getMethodParamsByName('createIncident')
+        // 	.then((methodParams) => {
+		// 		console.log(methodParams.request);
+		// 		console.log(methodParams.response);
+		// 	})
+		// 	.catch((err) => { throw new Error(err); });
 
 
-		/*
-		 * call soap method
-         */
+		// /*
+		//  * call soap method
+        //  */
     	soapClient.call({
-        	method    : 'methodName',
+        	method    : 'createIncident',
 			attributes: {
             	xmlns: 'http://www.sample.com'
             },
 			params: {
-				testParam: 1,
-				testParam: [2, 3],
-				testParam: {
-					'_value'     : 4,
-					'_attributes': {
-                    	'xmlns1': 'http://www.sample.com/other'
-                    }
-                }
+                AuthenticationInfo: {
+					'userName'     : 'WSKPORG',
+					'password': 'eventexcavations8401'
+                },
+                action: 'CREATE',
+				status: 'Assigned',
+                impact: '3-Moderate/Limited',
+                urgency: '3-Medium',
+                incidentType: 'Infrastructure Event',
+                customerNUID: 'WSKPORG',
+                reportedSource: 'Systems Management',
+                summary: 'TEST INCIDENT CREATION',
+                detailedDescription: 'This is a test incident created by a Node.js plugin from Dynatrace',
+                productCategorizationTier1: 'Software',
+                productCategorizationTier2: 'Application',
+                productCategorizationTier3: 'EBiz',
+                productName: 'Ebiz - Application Support',
+                assignedWithinSupportCompany: 'Kaiser Permanente',
+                assignedSupportOrganization: 'Application Support',
+                assignedGroup: 'ASG DTAS APP SUP'
             }
         })
         .then((callResponse) => {
