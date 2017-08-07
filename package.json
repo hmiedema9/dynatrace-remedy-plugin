@@ -11,8 +11,8 @@
   "homepage": "https://github.com/hmiedema9/dynatrace-remedy-plugin",
   "dependencies": {
     "body-parser": "1.10.2",
-    "easysoap": "^1.0.6",
     "express": "4.11.1",
+    "handlebars-soap-request": "^1.0.2",
     "nodemailer": "^4.0.1",
     "soap": "^0.19.2"
   }

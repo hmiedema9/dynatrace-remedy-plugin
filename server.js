@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 var router = express.Router();
 var easysoap = require('easysoap');
+var soapRequest = require('handlebars-soap-request'); 
 
 // for parsing JSON
 app.use(bodyParser.json({ type: 'application/json' }));
@@ -46,27 +47,35 @@ app.get('/', (request, response) => {
   })
 })
 
+var options = {
+    handlebarsTemplate: 'example.xml',
+	url: 'http://izxuwa5.ivdc.kp.org:9080/arsys/services/ARService?server=remedy-uat.kp.org&amp;webService=KP_Remedy_HPD_Incident_Create_v3'
+};
+
+soapRequest(options, function(err, response) {
+	console.log("Finished")
+});
 
 // define soap params
-    var params = {
-		host   : 'http://izxuwa5.ivdc.kp.org:9080/',
-		path   : '/arsys/services/ARService',
-        wsdl   : '/arsys/services/ARService?wsdl',
+    // var params = {
+	// 	host   : 'http://izxuwa5.ivdc.kp.org:9080/',
+	// 	path   : '/arsys/services/ARService',
+    //     wsdl   : '/arsys/services/ARService?wsdl'
 
-		// set soap headers (optional)
-		headers: [{
-            AuthenticationInfo : {
-                userName : 'WSKPORG',
-                password : 'eventexcavations8401'
-            }
-        }]
-    }
+	// 	set soap headers (optional)
+	// 	headers: [{
+    //         AuthenticationInfo : {
+    //             userName : 'WSKPORG',
+    //             password : 'eventexcavations8401'
+    //         }
+    //     }]
+    // }
 
 
 /*
      * create the client
      */
-    var soapClient = easysoap.createClient(params);
+    // var soapClient = easysoap.createClient(params);
 
 
         /*
@@ -91,40 +100,40 @@ app.get('/', (request, response) => {
 		// /*
 		//  * call soap method
         //  */
-    	soapClient.call({
-        	method    : 'createIncident',
-			attributes: {
-            	xmlns: 'http://www.sample.com'
-            },
-			params: {
-                AuthenticationInfo: {
-					'userName'     : 'WSKPORG',
-					'password': 'eventexcavations8401'
-                },
-                action: 'CREATE',
-				status: 'Assigned',
-                impact: '3-Moderate/Limited',
-                urgency: '3-Medium',
-                incidentType: 'Infrastructure Event',
-                customerNUID: 'WSKPORG',
-                reportedSource: 'Systems Management',
-                summary: 'TEST INCIDENT CREATION',
-                detailedDescription: 'This is a test incident created by a Node.js plugin from Dynatrace',
-                productCategorizationTier1: 'Software',
-                productCategorizationTier2: 'Application',
-                productCategorizationTier3: 'EBiz',
-                productName: 'Ebiz - Application Support',
-                assignedWithinSupportCompany: 'Kaiser Permanente',
-                assignedSupportOrganization: 'Application Support',
-                assignedGroup: 'ASG DTAS APP SUP'
-            }
-        })
-        .then((callResponse) => {
-			console.log(callResponse.data);	// response data as json
-            console.log(callResponse.body);	// response body
-			console.log(callResponse.header);  //response header
-        })
-		.catch((err) => { throw new Error(err); });
+    	// soapClient.call({
+        // 	method    : 'createIncident',
+		// 	attributes: {
+        //     	xmlns: 'urn:KP_Remedy_HPD_Incident_Create_v3'
+        //     },
+		// 	params: {
+        //         AuthenticationInfo: {
+		// 			'userName'     : 'WSKPORG',
+		// 			'password': 'eventexcavations8401'
+        //         },
+        //         action: 'CREATE',
+		// 		status: 'Assigned',
+        //         impact: '3-Moderate/Limited',
+        //         urgency: '3-Medium',
+        //         incidentType: 'Infrastructure Event',
+        //         customerNUID: 'WSKPORG',
+        //         reportedSource: 'Systems Management',
+        //         summary: 'TEST INCIDENT CREATION',
+        //         detailedDescription: 'This is a test incident created by a Node.js plugin from Dynatrace',
+        //         productCategorizationTier1: 'Software',
+        //         productCategorizationTier2: 'Application',
+        //         productCategorizationTier3: 'EBiz',
+        //         productName: 'Ebiz - Application Support',
+        //         assignedWithinSupportCompany: 'Kaiser Permanente',
+        //         assignedSupportOrganization: 'Application Support',
+        //         assignedGroup: 'ASG DTAS APP SUP'
+        //     }
+        // })
+        // .then((callResponse) => {
+		// 	console.log(callResponse.data);	// response data as json
+        //     console.log(callResponse.body);	// response body
+		// 	console.log(callResponse.header);  //response header
+        // })
+		// .catch((err) => { throw new Error(err); });
 
 app.post('/dynatrace', function(req, res) {
   var body = req.body;
@@ -132,7 +141,6 @@ app.post('/dynatrace', function(req, res) {
   var problem_id = body.ProblemID;
   var problem_title = body.ProblemTitle;
   
-
   console.log("Data Below");
   console.log("Problem ID:", problem_id, "\nProblem State:", problem_state, "\nProblem Title:", problem_title);
 

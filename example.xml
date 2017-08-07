@@ -1,8 +1,8 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:KP_Remedy_HPD_Incident_Create_v3">
    <soapenv:Header>
       <urn:AuthenticationInfo>
-         <urn:userName>WSKPORG</urn:userName>
-         <urn:password>eventexcavations8401</urn:password>
+         <urn:userName>USERNAME</urn:userName>
+         <urn:password>PASSWORD</urn:password>
          <!--Optional:-->
          <urn:authentication></urn:authentication>
          <!--Optional:-->
@@ -21,7 +21,7 @@
          <!--Optional:-->
          <urn:customerNUID>WSKPORG</urn:customerNUID>
          <urn:reportedSource>Systems Management</urn:reportedSource>
-         <urn:summary>TEST INCIDENT CREATION</urn:summary>
+         <urn:summary>TEST INCIDENT CREATION - DYNATRACE NEW</urn:summary>
          <!--Optional:-->
          <urn:detailedDescription>This is a test incident created by a Node.js plugin from Dynatrace</urn:detailedDescription>
          <urn:productCategorizationTier1>Software</urn:productCategorizationTier1>
