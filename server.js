@@ -5,7 +5,6 @@ const bodyParser = require('body-parser');
 'use strict';
 const nodemailer = require('nodemailer');
 var router = express.Router();
-var easysoap = require('easysoap');
 var soapRequest = require('handlebars-soap-request'); 
 
 // for parsing JSON
@@ -48,7 +47,95 @@ app.get('/', (request, response) => {
 })
 
 var options = {
-    handlebarsTemplate: 'example.xml',
+    handlebarsTemplate: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:KP_Remedy_HPD_Incident_Create_v3">\
+   <soapenv:Header>\
+      <urn:AuthenticationInfo>\
+         <urn:userName>WSKPORG</urn:userName>\
+         <urn:password>eventexcavations8401</urn:password>\
+         <!--Optional:-->\
+         <urn:authentication></urn:authentication>\
+         <!--Optional:-->\
+         <urn:locale></urn:locale>\
+         <!--Optional:-->\
+         <urn:timeZone></urn:timeZone>\
+      </urn:AuthenticationInfo>\
+   </soapenv:Header>\
+   <soapenv:Body>\
+      <urn:createIncident>\
+         <urn:action>CREATE</urn:action>\
+         <urn:status>Assigned</urn:status>\
+         <urn:impact>3-Moderate/Limited</urn:impact>\
+         <urn:urgency>3-Medium</urn:urgency>\
+         <urn:incidentType>Infrastructure Event</urn:incidentType>\
+         <!--Optional:-->\
+         <urn:customerNUID>WSKPORG</urn:customerNUID>\
+         <urn:reportedSource>Systems Management</urn:reportedSource>\
+         <urn:summary>TEST INCIDENT CREATION - DYNATRACE <NE></NE>W</urn:summary>\
+         <!--Optional:-->\
+         <urn:detailedDescription>This is a test incident created by a Node.js plugin from Dynatrace</urn:detailedDescription>\
+         <urn:productCategorizationTier1>Software</urn:productCategorizationTier1>\
+         <urn:productCategorizationTier2>Application</urn:productCategorizationTier2>\
+         <urn:productCategorizationTier3>EBiz</urn:productCategorizationTier3>\
+         <urn:productName>Ebiz - Application Support</urn:productName>\
+         <!--Optional:-->\
+         <urn:productManufacturer></urn:productManufacturer>\
+         <!--Optional:-->\
+         <urn:productModelVersion></urn:productModelVersion>\
+         <!--Optional:-->\
+         <urn:operationalCategorizationTier1></urn:operationalCategorizationTier1>\
+         <!--Optional:-->\
+         <urn:operationalCategorizationTier2></urn:operationalCategorizationTier2>\
+         <!--Optional:-->\
+         <urn:operationalCategorizationTier3></urn:operationalCategorizationTier3>\
+         <!--Optional:-->\
+         <urn:assignedWithinSupportCompany>Kaiser Permanente</urn:assignedWithinSupportCompany>\
+         <!--Optional:-->\
+         <urn:assignedSupportOrganization>Application Support</urn:assignedSupportOrganization>\
+         <!--Optional:-->\
+         <urn:assignedGroup>ASG DTAS APP SUP</urn:assignedGroup>\
+         <!--Optional:-->\
+         <urn:assignee></urn:assignee>\
+         <!--Optional:-->\
+         <urn:workInfo100Char></urn:workInfo100Char>\
+         <!--Optional:-->\
+         <urn:workInfo></urn:workInfo>\
+         <!--Optional:-->\
+         <urn:workInfoType>----- Customer Inbound -----</urn:workInfoType>\
+         <!--Optional:-->\
+         <urn:workInfoDateOcurred></urn:workInfoDateOcurred>\
+         <!--Optional:-->\
+         <urn:workInfoSource>Email</urn:workInfoSource>\
+         <!--Optional:-->\
+         <urn:workInfoLocked>No</urn:workInfoLocked>\
+         <!--Optional:-->\
+         <urn:workInfoCopyToRequest>Internal</urn:workInfoCopyToRequest>\
+         <!--Optional:-->\
+         <urn:secondaryContactNUID></urn:secondaryContactNUID>\
+         <!--Optional:-->\
+         <urn:vendorTicketNumber></urn:vendorTicketNumber>\
+         <!--Optional:-->\
+         <urn:region></urn:region>\
+         <!--Optional:-->\
+         <urn:siteGroup></urn:siteGroup>\
+         <!--Optional:-->\
+         <urn:site></urn:site>\
+         <!--Optional:-->\
+         <urn:serviceCI></urn:serviceCI>\
+         <!--Optional:-->\
+         <urn:causalCI></urn:causalCI>\
+         <!--Optional:-->\
+         <urn:impactedCIs></urn:impactedCIs>\
+         <!--Optional:-->\
+         <urn:eventClass></urn:eventClass>\
+         <!--Optional:-->\
+         <urn:eventKeyword></urn:eventKeyword>\
+         <!--Optional:-->\
+         <urn:eventSituationName></urn:eventSituationName>\
+         <!--Optional:-->\
+         <urn:environment></urn:environment>\
+      </urn:createIncident>\
+   </soapenv:Body>\
+</soapenv:Envelope>',
 	url: 'http://izxuwa5.ivdc.kp.org:9080/arsys/services/ARService?server=remedy-uat.kp.org&amp;webService=KP_Remedy_HPD_Incident_Create_v3'
 };
 

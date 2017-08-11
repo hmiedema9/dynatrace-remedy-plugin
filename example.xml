@@ -1,8 +1,8 @@
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:KP_Remedy_HPD_Incident_Create_v3">
    <soapenv:Header>
       <urn:AuthenticationInfo>
-         <urn:userName>USERNAME</urn:userName>
-         <urn:password>PASSWORD</urn:password>
+         <urn:userName>WSKPORG</urn:userName>
+         <urn:password>eventexcavations8401</urn:password>
          <!--Optional:-->
          <urn:authentication></urn:authentication>
          <!--Optional:-->
